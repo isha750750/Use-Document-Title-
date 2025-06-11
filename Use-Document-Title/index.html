@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Document Title Hook</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <!-- Step 2: React, ReactDOM, Babel CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- Step 3: JSX Code -->
+  <script type="text/babel">
+
+    // Step 4: Create custom hook to set document title
+    function useDocumentTitle(title) {
+      React.useEffect(() => {
+        document.title = title;
+      }, [title]);
+    }
+
+    // Step 5 & 6: Main component
+    function App() {
+      const [title, setTitle] = React.useState("React App");
+
+      // Using the custom hook
+      useDocumentTitle(title);
+
+      return (
+        <div>
+          <h2>Update Document Title</h2>
+          <input
+            type="text"
+            placeholder="Type a new title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <p>Current document title: <strong>{title}</strong></p>
+        </div>
+      );
+    }
+
+    // Render App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+    
+  </script>
+</body>
+</html>
